@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  influxdb:
+    image: influxdb:latest
+    ports:
+      - "8086:8086"
+    env_file:
+      - "env.influxdb"
+    volumes:
+      - influxdb-data:/var/lib/influxdb2
+      - influxdb-config:/etc/influxdb2
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    env_file:
+      - "env.grafana"
+    volumes:
+      - grafana-data:/var/lib/grafana
+
+volumes:
+  influxdb-data:
+    external: true
+
+  influxdb-config:
+    external: true
+
+  grafana-data:
+    external: true
